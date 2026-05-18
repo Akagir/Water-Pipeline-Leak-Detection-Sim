@@ -1,0 +1,2503 @@
+file 17963384 1779125255                                        
+version 3
+run HighLeakRate-0-20260518-20:22:35-54105
+attr configname HighLeakRate
+attr datetime 20260518-20:22:35
+attr datetimef 20260518-202235
+attr experiment HighLeakRate
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network flora.simulations.LoRaNetworkTest
+attr processid 54105
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../inet4.4/images
+config sim-time-limit 3600s
+config **.loRaNodes[*].app[0].leakLambda 0.016
+config network flora.simulations.LoRaNetworkTest
+config sim-time-limit 500s
+config simtime-resolution -11
+config **.loRaNodes[*].app[0].txGuardTime 20s
+config result-dir results
+config cmdenv-express-mode false
+config **.scalar-recording true
+config **.vector-recording true
+config rng-class cMersenneTwister
+config **.numberOfGateways 1
+config **.numberOfNodes 5
+config **.loRaNodes[*].LoRaNic.energySourceModule "\"^.IdealEpEnergyStorage\""
+config **.loRaGW[*].numUdpApps 1
+config **.loRaGW[0].packetForwarder.localPort 2000
+config **.loRaGW[0].packetForwarder.destPort 1000
+config **.loRaGW[0].packetForwarder.destAddresses "\"networkServer\""
+config **.loRaGW[0].packetForwarder.indexNumber 0
+config **.networkServer.numApps 1
+config **.networkServer.app[0].typename NetworkServerApp
+config **.networkServer.app[0].destAddresses "\"loRaGW[0]\""
+config **.networkServer.app[0].destPort 2000
+config **.networkServer.app[0].localPort 1000
+config **.networkServer.app[0].evaluateADRinServer true
+config **.networkServer.app[0].adrMethod "\"avg\""
+config **.loRaNodes[*].numApps 1
+config **.loRaNodes[*].app[0].typename WaterLeakLoRaApp
+config **.loRaNodes[*].app[0].reportInterval 10s
+config **.loRaNodes[*].app[0].timeToFirstReport "uniform(0s, 10s)"
+config **.loRaNodes[*].app[0].leakLambda 0.004
+config **.loRaNodes[*].app[0].initialLoRaTP 14dBm
+config **.loRaNodes[*].app[0].initialLoRaCF 868MHz
+config **.loRaNodes[*].app[0].initialLoRaSF 12
+config **.loRaNodes[*].app[0].initialLoRaBW 125kHz
+config **.loRaNodes[*].app[0].initialLoRaCR 4
+config **.loRaNodes[*].app[0].initialUseHeader true
+config **.loRaNodes[*].app[0].evaluateADRinNode true
+config **.loRaNodes[*].app[0].dataSize 20B
+config **.constraintAreaMinX 0m
+config **.constraintAreaMinY 0m
+config **.constraintAreaMinZ 0m
+config **.constraintAreaMaxX 1000m
+config **.constraintAreaMaxY 1000m
+config **.constraintAreaMaxZ 0m
+config **.loRaNodes[*].**.initFromDisplayString false
+config **.loRaGW[*].**.initFromDisplayString false
+config **.loRaGW[0].**.initialX 500m
+config **.loRaGW[0].**.initialY 500m
+config **.loRaNodes[0].**.initialX 300m
+config **.loRaNodes[0].**.initialY 300m
+config **.loRaNodes[1].**.initialX 700m
+config **.loRaNodes[1].**.initialY 300m
+config **.loRaNodes[2].**.initialX 300m
+config **.loRaNodes[2].**.initialY 700m
+config **.loRaNodes[3].**.initialX 700m
+config **.loRaNodes[3].**.initialY 700m
+config **.loRaNodes[4].**.initialX 500m
+config **.loRaNodes[4].**.initialY 200m
+config **.radio.radioMediumModule "\"LoRaMedium\""
+config **.LoRaMedium.pathLossType "\"LoRaLogNormalShadowing\""
+config **.sigma 3.57
+config **.minInterferenceTime 0s
+config **.maxTransmissionDuration 4s
+config **.energyDetection -110dBm
+config **.alohaChannelModel false
+config *.**.radio.separateTransmissionParts false
+config *.**.radio.separateReceptionParts false
+config **.LoRaMedium.mediumLimitCacheType "\"LoRaMediumCache\""
+config **.LoRaMedium.rangeFilter "\"communicationRange\""
+config **.LoRaMedium.neighborCacheType "\"LoRaNeighborCache\""
+config **.LoRaMedium.neighborCache.range 546m
+config **.LoRaMedium.neighborCache.refillPeriod 3000s
+config **.ipv4Delayer.config "xmldoc(\"cloudDelays.xml\")"
+
+vector 0 LoRaNetworkTest.loRaNodes[0].LoRaNic.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 1 LoRaNetworkTest.loRaNodes[0].LoRaNic.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 2 LoRaNetworkTest.loRaNodes[0].LoRaNic.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 3 LoRaNetworkTest.loRaNodes[0].LoRaNic.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 4 LoRaNetworkTest.loRaNodes[0].LoRaNic.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 5 LoRaNetworkTest.loRaNodes[0].LoRaNic.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 6 LoRaNetworkTest.loRaNodes[0].LoRaNic.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 7 LoRaNetworkTest.loRaNodes[0].LoRaNic.queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 8 LoRaNetworkTest.loRaNodes[0].LoRaNic.queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 9 LoRaNetworkTest.loRaNodes[0].LoRaNic.queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 10 LoRaNetworkTest.loRaNodes[0].LoRaNic.queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 11 LoRaNetworkTest.loRaNodes[0].LoRaNic.mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 12 LoRaNetworkTest.loRaNodes[0].LoRaNic.mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 13 LoRaNetworkTest.loRaNodes[0].LoRaNic.mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drop: queue overflow, packetBytes"
+vector 14 LoRaNetworkTest.loRaNodes[0].LoRaNic.mac packetDropRetryLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsRetryLimitReached(packetDropped)
+attr title "packet drop: retry limit reached, packetBytes"
+vector 15 LoRaNetworkTest.loRaNodes[0].LoRaNic.radio.IdealEpEnergyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+vector 16 LoRaNetworkTest.loRaNodes[0].LoRaNic.radio.IdealEpEnergyStorage powerGeneration:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerGenerationChanged
+attr title "Power generation"
+vector 17 LoRaNetworkTest.loRaNodes[0].LoRaNic.radio.IdealEpEnergyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity"
+vector 18 LoRaNetworkTest.loRaNodes[0].LoRaNic.radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 19 LoRaNetworkTest.loRaNodes[0].LoRaNic.radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 20 LoRaNetworkTest.loRaNodes[0].LoRaNic.radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 21 LoRaNetworkTest.loRaNodes[0].LoRaNic packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 22 LoRaNetworkTest.loRaNodes[0].LoRaNic packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 23 LoRaNetworkTest.loRaNodes[1].LoRaNic.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 24 LoRaNetworkTest.loRaNodes[1].LoRaNic.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 25 LoRaNetworkTest.loRaNodes[1].LoRaNic.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 26 LoRaNetworkTest.loRaNodes[1].LoRaNic.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 27 LoRaNetworkTest.loRaNodes[1].LoRaNic.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 28 LoRaNetworkTest.loRaNodes[1].LoRaNic.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 29 LoRaNetworkTest.loRaNodes[1].LoRaNic.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 30 LoRaNetworkTest.loRaNodes[1].LoRaNic.queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 31 LoRaNetworkTest.loRaNodes[1].LoRaNic.queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 32 LoRaNetworkTest.loRaNodes[1].LoRaNic.queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 33 LoRaNetworkTest.loRaNodes[1].LoRaNic.queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 34 LoRaNetworkTest.loRaNodes[1].LoRaNic.mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 35 LoRaNetworkTest.loRaNodes[1].LoRaNic.mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 36 LoRaNetworkTest.loRaNodes[1].LoRaNic.mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drop: queue overflow, packetBytes"
+vector 37 LoRaNetworkTest.loRaNodes[1].LoRaNic.mac packetDropRetryLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsRetryLimitReached(packetDropped)
+attr title "packet drop: retry limit reached, packetBytes"
+vector 38 LoRaNetworkTest.loRaNodes[1].LoRaNic.radio.IdealEpEnergyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+vector 39 LoRaNetworkTest.loRaNodes[1].LoRaNic.radio.IdealEpEnergyStorage powerGeneration:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerGenerationChanged
+attr title "Power generation"
+vector 40 LoRaNetworkTest.loRaNodes[1].LoRaNic.radio.IdealEpEnergyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity"
+vector 41 LoRaNetworkTest.loRaNodes[1].LoRaNic.radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 42 LoRaNetworkTest.loRaNodes[1].LoRaNic.radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 43 LoRaNetworkTest.loRaNodes[1].LoRaNic.radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 44 LoRaNetworkTest.loRaNodes[1].LoRaNic packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 45 LoRaNetworkTest.loRaNodes[1].LoRaNic packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 46 LoRaNetworkTest.loRaNodes[2].LoRaNic.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 47 LoRaNetworkTest.loRaNodes[2].LoRaNic.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 48 LoRaNetworkTest.loRaNodes[2].LoRaNic.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 49 LoRaNetworkTest.loRaNodes[2].LoRaNic.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 50 LoRaNetworkTest.loRaNodes[2].LoRaNic.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 51 LoRaNetworkTest.loRaNodes[2].LoRaNic.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 52 LoRaNetworkTest.loRaNodes[2].LoRaNic.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 53 LoRaNetworkTest.loRaNodes[2].LoRaNic.queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 54 LoRaNetworkTest.loRaNodes[2].LoRaNic.queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 55 LoRaNetworkTest.loRaNodes[2].LoRaNic.queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 56 LoRaNetworkTest.loRaNodes[2].LoRaNic.queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 57 LoRaNetworkTest.loRaNodes[2].LoRaNic.mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 58 LoRaNetworkTest.loRaNodes[2].LoRaNic.mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 59 LoRaNetworkTest.loRaNodes[2].LoRaNic.mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drop: queue overflow, packetBytes"
+vector 60 LoRaNetworkTest.loRaNodes[2].LoRaNic.mac packetDropRetryLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsRetryLimitReached(packetDropped)
+attr title "packet drop: retry limit reached, packetBytes"
+vector 61 LoRaNetworkTest.loRaNodes[2].LoRaNic.radio.IdealEpEnergyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+vector 62 LoRaNetworkTest.loRaNodes[2].LoRaNic.radio.IdealEpEnergyStorage powerGeneration:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerGenerationChanged
+attr title "Power generation"
+vector 63 LoRaNetworkTest.loRaNodes[2].LoRaNic.radio.IdealEpEnergyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity"
+vector 64 LoRaNetworkTest.loRaNodes[2].LoRaNic.radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 65 LoRaNetworkTest.loRaNodes[2].LoRaNic.radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 66 LoRaNetworkTest.loRaNodes[2].LoRaNic.radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 67 LoRaNetworkTest.loRaNodes[2].LoRaNic packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 68 LoRaNetworkTest.loRaNodes[2].LoRaNic packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 69 LoRaNetworkTest.loRaNodes[3].LoRaNic.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 70 LoRaNetworkTest.loRaNodes[3].LoRaNic.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 71 LoRaNetworkTest.loRaNodes[3].LoRaNic.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 72 LoRaNetworkTest.loRaNodes[3].LoRaNic.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 73 LoRaNetworkTest.loRaNodes[3].LoRaNic.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 74 LoRaNetworkTest.loRaNodes[3].LoRaNic.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 75 LoRaNetworkTest.loRaNodes[3].LoRaNic.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 76 LoRaNetworkTest.loRaNodes[3].LoRaNic.queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 77 LoRaNetworkTest.loRaNodes[3].LoRaNic.queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 78 LoRaNetworkTest.loRaNodes[3].LoRaNic.queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 79 LoRaNetworkTest.loRaNodes[3].LoRaNic.queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 80 LoRaNetworkTest.loRaNodes[3].LoRaNic.mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 81 LoRaNetworkTest.loRaNodes[3].LoRaNic.mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 82 LoRaNetworkTest.loRaNodes[3].LoRaNic.mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drop: queue overflow, packetBytes"
+vector 83 LoRaNetworkTest.loRaNodes[3].LoRaNic.mac packetDropRetryLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsRetryLimitReached(packetDropped)
+attr title "packet drop: retry limit reached, packetBytes"
+vector 84 LoRaNetworkTest.loRaNodes[3].LoRaNic.radio.IdealEpEnergyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+vector 85 LoRaNetworkTest.loRaNodes[3].LoRaNic.radio.IdealEpEnergyStorage powerGeneration:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerGenerationChanged
+attr title "Power generation"
+vector 86 LoRaNetworkTest.loRaNodes[3].LoRaNic.radio.IdealEpEnergyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity"
+vector 87 LoRaNetworkTest.loRaNodes[3].LoRaNic.radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 88 LoRaNetworkTest.loRaNodes[3].LoRaNic.radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 89 LoRaNetworkTest.loRaNodes[3].LoRaNic.radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 90 LoRaNetworkTest.loRaNodes[3].LoRaNic packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 91 LoRaNetworkTest.loRaNodes[3].LoRaNic packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 92 LoRaNetworkTest.loRaNodes[4].LoRaNic.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 93 LoRaNetworkTest.loRaNodes[4].LoRaNic.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 94 LoRaNetworkTest.loRaNodes[4].LoRaNic.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 95 LoRaNetworkTest.loRaNodes[4].LoRaNic.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 96 LoRaNetworkTest.loRaNodes[4].LoRaNic.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 97 LoRaNetworkTest.loRaNodes[4].LoRaNic.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 98 LoRaNetworkTest.loRaNodes[4].LoRaNic.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 99 LoRaNetworkTest.loRaNodes[4].LoRaNic.queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 100 LoRaNetworkTest.loRaNodes[4].LoRaNic.queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 101 LoRaNetworkTest.loRaNodes[4].LoRaNic.queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 102 LoRaNetworkTest.loRaNodes[4].LoRaNic.queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 103 LoRaNetworkTest.loRaNodes[4].LoRaNic.mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 104 LoRaNetworkTest.loRaNodes[4].LoRaNic.mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 105 LoRaNetworkTest.loRaNodes[4].LoRaNic.mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drop: queue overflow, packetBytes"
+vector 106 LoRaNetworkTest.loRaNodes[4].LoRaNic.mac packetDropRetryLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsRetryLimitReached(packetDropped)
+attr title "packet drop: retry limit reached, packetBytes"
+vector 107 LoRaNetworkTest.loRaNodes[4].LoRaNic.radio.IdealEpEnergyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+vector 108 LoRaNetworkTest.loRaNodes[4].LoRaNic.radio.IdealEpEnergyStorage powerGeneration:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerGenerationChanged
+attr title "Power generation"
+vector 109 LoRaNetworkTest.loRaNodes[4].LoRaNic.radio.IdealEpEnergyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity"
+vector 110 LoRaNetworkTest.loRaNodes[4].LoRaNic.radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 111 LoRaNetworkTest.loRaNodes[4].LoRaNic.radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 112 LoRaNetworkTest.loRaNodes[4].LoRaNic.radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 113 LoRaNetworkTest.loRaNodes[4].LoRaNic packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 114 LoRaNetworkTest.loRaNodes[4].LoRaNic packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 115 LoRaNetworkTest.loRaGW[0].LoRaGWNic.radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 116 LoRaNetworkTest.loRaGW[0].LoRaGWNic.radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 117 LoRaNetworkTest.loRaGW[0].LoRaGWNic.radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 118 LoRaNetworkTest.loRaGW[0].LoRaGWNic packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 119 LoRaNetworkTest.loRaGW[0].LoRaGWNic packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 120 LoRaNetworkTest.loRaGW[0].eth[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 121 LoRaNetworkTest.loRaGW[0].eth[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 122 LoRaNetworkTest.loRaGW[0].eth[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 123 LoRaNetworkTest.loRaGW[0].eth[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 124 LoRaNetworkTest.loRaGW[0].eth[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 125 LoRaNetworkTest.loRaGW[0].eth[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 126 LoRaNetworkTest.loRaGW[0].eth[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 127 LoRaNetworkTest.loRaGW[0].eth[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 128 LoRaNetworkTest.loRaGW[0].eth[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 129 LoRaNetworkTest.loRaGW[0].eth[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 130 LoRaNetworkTest.loRaGW[0].eth[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 131 LoRaNetworkTest.loRaGW[0].eth[0].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 132 LoRaNetworkTest.loRaGW[0].eth[0].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 133 LoRaNetworkTest.loRaGW[0].eth[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 134 LoRaNetworkTest.loRaGW[0].eth[0].mac txPausePkUnits:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "pause units sent"
+vector 135 LoRaNetworkTest.loRaGW[0].eth[0].mac rxPausePkUnits:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "pause units received"
+vector 136 LoRaNetworkTest.loRaGW[0].eth[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, packetBytes"
+vector 137 LoRaNetworkTest.loRaGW[0].eth[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 138 LoRaNetworkTest.loRaGW[0].eth[0].mac packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 139 LoRaNetworkTest.loRaGW[0].eth[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 140 LoRaNetworkTest.loRaGW[0].eth[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 141 LoRaNetworkTest.loRaGW[0].eth[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 142 LoRaNetworkTest.loRaGW[0].udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 143 LoRaNetworkTest.loRaGW[0].udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 144 LoRaNetworkTest.loRaGW[0].udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 145 LoRaNetworkTest.loRaGW[0].udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 146 LoRaNetworkTest.loRaGW[0].udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 147 LoRaNetworkTest.loRaGW[0].ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 148 LoRaNetworkTest.loRaGW[0].ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 149 LoRaNetworkTest.loRaGW[0].ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 150 LoRaNetworkTest.loRaGW[0].ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 151 LoRaNetworkTest.loRaGW[0].ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 152 LoRaNetworkTest.loRaGW[0].ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 153 LoRaNetworkTest.loRaGW[0].ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 154 LoRaNetworkTest.loRaGW[0].ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 155 LoRaNetworkTest.loRaGW[0].ethernet encapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source encapPk
+attr title "packets encapsulated, packetBytes"
+vector 156 LoRaNetworkTest.loRaGW[0].ethernet decapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source decapPk
+attr title "packets decapsulated, packetBytes"
+vector 157 LoRaNetworkTest.loRaGW[0].ethernet pauseSent:vector ETV
+attr recordingmode vector
+attr title "pause sent"
+vector 158 LoRaNetworkTest.networkServer.ethernet encapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source encapPk
+attr title "packets encapsulated, packetBytes"
+vector 159 LoRaNetworkTest.networkServer.ethernet decapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source decapPk
+attr title "packets decapsulated, packetBytes"
+vector 160 LoRaNetworkTest.networkServer.ethernet pauseSent:vector ETV
+attr recordingmode vector
+attr title "pause sent"
+vector 161 LoRaNetworkTest.networkServer.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 162 LoRaNetworkTest.networkServer.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 163 LoRaNetworkTest.networkServer.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 164 LoRaNetworkTest.networkServer.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 165 LoRaNetworkTest.networkServer.eth[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 166 LoRaNetworkTest.networkServer.eth[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 167 LoRaNetworkTest.networkServer.eth[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 168 LoRaNetworkTest.networkServer.eth[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 169 LoRaNetworkTest.networkServer.eth[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 170 LoRaNetworkTest.networkServer.eth[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 171 LoRaNetworkTest.networkServer.eth[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 172 LoRaNetworkTest.networkServer.eth[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 173 LoRaNetworkTest.networkServer.eth[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 174 LoRaNetworkTest.networkServer.eth[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 175 LoRaNetworkTest.networkServer.eth[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 176 LoRaNetworkTest.networkServer.eth[0].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 177 LoRaNetworkTest.networkServer.eth[0].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 178 LoRaNetworkTest.networkServer.eth[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 179 LoRaNetworkTest.networkServer.eth[0].mac txPausePkUnits:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "pause units sent"
+vector 180 LoRaNetworkTest.networkServer.eth[0].mac rxPausePkUnits:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "pause units received"
+vector 181 LoRaNetworkTest.networkServer.eth[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, packetBytes"
+vector 182 LoRaNetworkTest.networkServer.eth[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 183 LoRaNetworkTest.networkServer.eth[0].mac packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 184 LoRaNetworkTest.networkServer.eth[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 185 LoRaNetworkTest.networkServer.eth[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 186 LoRaNetworkTest.networkServer.eth[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 187 LoRaNetworkTest.networkServer.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 188 LoRaNetworkTest.networkServer.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 189 LoRaNetworkTest.networkServer.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 190 LoRaNetworkTest.networkServer.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 191 LoRaNetworkTest.networkServer.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 192 LoRaNetworkTest.networkServer.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 193 LoRaNetworkTest.networkServer.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 194 LoRaNetworkTest.networkServer.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 195 LoRaNetworkTest.networkServer.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 196 LoRaNetworkTest.networkServer.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 197 LoRaNetworkTest.networkServer.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 198 LoRaNetworkTest.networkServer.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 199 LoRaNetworkTest.networkServer.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 200 LoRaNetworkTest.internetCloud.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 201 LoRaNetworkTest.internetCloud.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 202 LoRaNetworkTest.internetCloud.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 203 LoRaNetworkTest.internetCloud.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 204 LoRaNetworkTest.internetCloud.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 205 LoRaNetworkTest.internetCloud.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 206 LoRaNetworkTest.internetCloud.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 207 LoRaNetworkTest.internetCloud.ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 208 LoRaNetworkTest.internetCloud.ppp[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 209 LoRaNetworkTest.internetCloud.ppp[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 210 LoRaNetworkTest.internetCloud.ppp[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 211 LoRaNetworkTest.internetCloud.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 212 LoRaNetworkTest.internetCloud.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 213 LoRaNetworkTest.internetCloud.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 214 LoRaNetworkTest.internetCloud.ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 215 LoRaNetworkTest.internetCloud.ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 216 LoRaNetworkTest.internetCloud.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 217 LoRaNetworkTest.internetCloud.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 218 LoRaNetworkTest.internetCloud.ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 219 LoRaNetworkTest.internetCloud.ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 220 LoRaNetworkTest.internetCloud.ppp[1].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 221 LoRaNetworkTest.internetCloud.ppp[1].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 222 LoRaNetworkTest.internetCloud.ppp[1].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 223 LoRaNetworkTest.internetCloud.ppp[1].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 224 LoRaNetworkTest.internetCloud.ppp[1].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 225 LoRaNetworkTest.internetCloud.ppp[1].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 226 LoRaNetworkTest.internetCloud.ppp[1].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 227 LoRaNetworkTest.internetCloud.ppp[1].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 228 LoRaNetworkTest.internetCloud.ppp[1].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 229 LoRaNetworkTest.internetCloud.ppp[1].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 230 LoRaNetworkTest.internetCloud.ppp[1].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 231 LoRaNetworkTest.internetCloud.ppp[1].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 232 LoRaNetworkTest.internetCloud.ppp[1].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 233 LoRaNetworkTest.internetCloud.ppp[1].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 234 LoRaNetworkTest.internetCloud.ppp[1].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 235 LoRaNetworkTest.internetCloud.ppp[1].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 236 LoRaNetworkTest.internetCloud.ppp[1].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 237 LoRaNetworkTest.internetCloud.ppp[1].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 238 LoRaNetworkTest.internetCloud.ppp[1] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 239 LoRaNetworkTest.internetCloud.ppp[1] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 240 LoRaNetworkTest.internetCloud.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 241 LoRaNetworkTest.internetCloud.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 242 LoRaNetworkTest.internetCloud.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 243 LoRaNetworkTest.internetCloud.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 244 LoRaNetworkTest.internetCloud.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 245 LoRaNetworkTest.internetCloud.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 246 LoRaNetworkTest.internetCloud.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 247 LoRaNetworkTest.internetCloud.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 248 LoRaNetworkTest.gwRouter[0].ethernet encapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source encapPk
+attr title "packets encapsulated, packetBytes"
+vector 249 LoRaNetworkTest.gwRouter[0].ethernet decapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source decapPk
+attr title "packets decapsulated, packetBytes"
+vector 250 LoRaNetworkTest.gwRouter[0].ethernet pauseSent:vector ETV
+attr recordingmode vector
+attr title "pause sent"
+vector 251 LoRaNetworkTest.gwRouter[0].lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 252 LoRaNetworkTest.gwRouter[0].lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 253 LoRaNetworkTest.gwRouter[0].lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 254 LoRaNetworkTest.gwRouter[0].lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 255 LoRaNetworkTest.gwRouter[0].ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 256 LoRaNetworkTest.gwRouter[0].ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 257 LoRaNetworkTest.gwRouter[0].ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 258 LoRaNetworkTest.gwRouter[0].ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 259 LoRaNetworkTest.gwRouter[0].ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 260 LoRaNetworkTest.gwRouter[0].ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 261 LoRaNetworkTest.gwRouter[0].ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 262 LoRaNetworkTest.gwRouter[0].ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 263 LoRaNetworkTest.gwRouter[0].ppp[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 264 LoRaNetworkTest.gwRouter[0].ppp[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 265 LoRaNetworkTest.gwRouter[0].ppp[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 266 LoRaNetworkTest.gwRouter[0].ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 267 LoRaNetworkTest.gwRouter[0].ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 268 LoRaNetworkTest.gwRouter[0].ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 269 LoRaNetworkTest.gwRouter[0].ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 270 LoRaNetworkTest.gwRouter[0].ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 271 LoRaNetworkTest.gwRouter[0].ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 272 LoRaNetworkTest.gwRouter[0].ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 273 LoRaNetworkTest.gwRouter[0].ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 274 LoRaNetworkTest.gwRouter[0].ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 275 LoRaNetworkTest.gwRouter[0].eth[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 276 LoRaNetworkTest.gwRouter[0].eth[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 277 LoRaNetworkTest.gwRouter[0].eth[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 278 LoRaNetworkTest.gwRouter[0].eth[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 279 LoRaNetworkTest.gwRouter[0].eth[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 280 LoRaNetworkTest.gwRouter[0].eth[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 281 LoRaNetworkTest.gwRouter[0].eth[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 282 LoRaNetworkTest.gwRouter[0].eth[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 283 LoRaNetworkTest.gwRouter[0].eth[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 284 LoRaNetworkTest.gwRouter[0].eth[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 285 LoRaNetworkTest.gwRouter[0].eth[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 286 LoRaNetworkTest.gwRouter[0].eth[0].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 287 LoRaNetworkTest.gwRouter[0].eth[0].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 288 LoRaNetworkTest.gwRouter[0].eth[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 289 LoRaNetworkTest.gwRouter[0].eth[0].mac txPausePkUnits:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "pause units sent"
+vector 290 LoRaNetworkTest.gwRouter[0].eth[0].mac rxPausePkUnits:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "pause units received"
+vector 291 LoRaNetworkTest.gwRouter[0].eth[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, packetBytes"
+vector 292 LoRaNetworkTest.gwRouter[0].eth[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 293 LoRaNetworkTest.gwRouter[0].eth[0].mac packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 294 LoRaNetworkTest.gwRouter[0].eth[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 295 LoRaNetworkTest.gwRouter[0].eth[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 296 LoRaNetworkTest.gwRouter[0].eth[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 297 LoRaNetworkTest.gwRouter[0].ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 298 LoRaNetworkTest.gwRouter[0].ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 299 LoRaNetworkTest.gwRouter[0].ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 300 LoRaNetworkTest.gwRouter[0].ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 301 LoRaNetworkTest.gwRouter[0].ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 302 LoRaNetworkTest.gwRouter[0].ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 303 LoRaNetworkTest.gwRouter[0].ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 304 LoRaNetworkTest.gwRouter[0].ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 305 LoRaNetworkTest.nsRouter.ethernet encapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source encapPk
+attr title "packets encapsulated, packetBytes"
+vector 306 LoRaNetworkTest.nsRouter.ethernet decapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source decapPk
+attr title "packets decapsulated, packetBytes"
+vector 307 LoRaNetworkTest.nsRouter.ethernet pauseSent:vector ETV
+attr recordingmode vector
+attr title "pause sent"
+vector 308 LoRaNetworkTest.nsRouter.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 309 LoRaNetworkTest.nsRouter.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 310 LoRaNetworkTest.nsRouter.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 311 LoRaNetworkTest.nsRouter.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 312 LoRaNetworkTest.nsRouter.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 313 LoRaNetworkTest.nsRouter.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 314 LoRaNetworkTest.nsRouter.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 315 LoRaNetworkTest.nsRouter.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 316 LoRaNetworkTest.nsRouter.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 317 LoRaNetworkTest.nsRouter.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 318 LoRaNetworkTest.nsRouter.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 319 LoRaNetworkTest.nsRouter.ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 320 LoRaNetworkTest.nsRouter.ppp[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 321 LoRaNetworkTest.nsRouter.ppp[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 322 LoRaNetworkTest.nsRouter.ppp[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 323 LoRaNetworkTest.nsRouter.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 324 LoRaNetworkTest.nsRouter.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 325 LoRaNetworkTest.nsRouter.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 326 LoRaNetworkTest.nsRouter.ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 327 LoRaNetworkTest.nsRouter.ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 328 LoRaNetworkTest.nsRouter.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 329 LoRaNetworkTest.nsRouter.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 330 LoRaNetworkTest.nsRouter.ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 331 LoRaNetworkTest.nsRouter.ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 332 LoRaNetworkTest.nsRouter.eth[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 333 LoRaNetworkTest.nsRouter.eth[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 334 LoRaNetworkTest.nsRouter.eth[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 335 LoRaNetworkTest.nsRouter.eth[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 336 LoRaNetworkTest.nsRouter.eth[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 337 LoRaNetworkTest.nsRouter.eth[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 338 LoRaNetworkTest.nsRouter.eth[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 339 LoRaNetworkTest.nsRouter.eth[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 340 LoRaNetworkTest.nsRouter.eth[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 341 LoRaNetworkTest.nsRouter.eth[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 342 LoRaNetworkTest.nsRouter.eth[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 343 LoRaNetworkTest.nsRouter.eth[0].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 344 LoRaNetworkTest.nsRouter.eth[0].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 345 LoRaNetworkTest.nsRouter.eth[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 346 LoRaNetworkTest.nsRouter.eth[0].mac txPausePkUnits:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "pause units sent"
+vector 347 LoRaNetworkTest.nsRouter.eth[0].mac rxPausePkUnits:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "pause units received"
+vector 348 LoRaNetworkTest.nsRouter.eth[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, packetBytes"
+vector 349 LoRaNetworkTest.nsRouter.eth[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 350 LoRaNetworkTest.nsRouter.eth[0].mac packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 351 LoRaNetworkTest.nsRouter.eth[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 352 LoRaNetworkTest.nsRouter.eth[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 353 LoRaNetworkTest.nsRouter.eth[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 354 LoRaNetworkTest.nsRouter.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 355 LoRaNetworkTest.nsRouter.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 356 LoRaNetworkTest.nsRouter.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 357 LoRaNetworkTest.nsRouter.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 358 LoRaNetworkTest.nsRouter.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 359 LoRaNetworkTest.nsRouter.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 360 LoRaNetworkTest.nsRouter.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 361 LoRaNetworkTest.nsRouter.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 362 LoRaNetworkTest.loRaNodes[0].app[0] leakInterArrivalTime ETV
+vector 363 LoRaNetworkTest.loRaNodes[1].app[0] leakInterArrivalTime ETV
+vector 364 LoRaNetworkTest.loRaNodes[2].app[0] leakInterArrivalTime ETV
+vector 365 LoRaNetworkTest.loRaNodes[3].app[0] leakInterArrivalTime ETV
+vector 366 LoRaNetworkTest.loRaNodes[4].app[0] leakInterArrivalTime ETV
+vector 367 LoRaNetworkTest.loRaNodes[4].app[0] alarmSent ETV
+vector 368 LoRaNetworkTest.loRaNodes[4].app[0] "SF Vector" ETV
+vector 369 LoRaNetworkTest.loRaNodes[4].app[0] "TP Vector" ETV
+vector 370 LoRaNetworkTest.loRaNodes[1].app[0] pressureValue ETV
+vector 371 LoRaNetworkTest.loRaNodes[1].app[0] "SF Vector" ETV
+vector 372 LoRaNetworkTest.loRaNodes[1].app[0] "TP Vector" ETV
+vector 373 LoRaNetworkTest.loRaNodes[3].app[0] pressureValue ETV
+vector 374 LoRaNetworkTest.loRaNodes[3].app[0] "SF Vector" ETV
+vector 375 LoRaNetworkTest.loRaNodes[3].app[0] "TP Vector" ETV
+vector 376 LoRaNetworkTest.networkServer.app[0] "Vector of SNIR per node" ETV
+vector 377 LoRaNetworkTest.networkServer.app[0] "Vector of RSSI per node" ETV
+vector 378 LoRaNetworkTest.loRaNodes[0].app[0] pressureValue ETV
+vector 379 LoRaNetworkTest.loRaNodes[0].app[0] "SF Vector" ETV
+vector 380 LoRaNetworkTest.loRaNodes[0].app[0] "TP Vector" ETV
+vector 381 LoRaNetworkTest.loRaNodes[2].app[0] pressureValue ETV
+vector 382 LoRaNetworkTest.loRaNodes[2].app[0] "SF Vector" ETV
+vector 383 LoRaNetworkTest.loRaNodes[2].app[0] "TP Vector" ETV
+vector 384 LoRaNetworkTest.networkServer.app[0] "Received Sequence number" ETV
+vector 385 LoRaNetworkTest.loRaNodes[4].app[0] pressureValue ETV
+vector 386 LoRaNetworkTest.loRaNodes[3].app[0] alarmSent ETV
+vector 387 LoRaNetworkTest.loRaNodes[2].app[0] alarmSent ETV
+vector 388 LoRaNetworkTest.networkServer.app[0] "Vector of SNIR per node" ETV
+vector 389 LoRaNetworkTest.networkServer.app[0] "Vector of RSSI per node" ETV
+vector 390 LoRaNetworkTest.networkServer.app[0] "Received Sequence number" ETV
+vector 391 LoRaNetworkTest.loRaNodes[1].app[0] alarmSent ETV
+vector 392 LoRaNetworkTest.networkServer.app[0] "Vector of SNIR per node" ETV
+vector 393 LoRaNetworkTest.networkServer.app[0] "Vector of RSSI per node" ETV
+vector 394 LoRaNetworkTest.networkServer.app[0] "Received Sequence number" ETV
+vector 395 LoRaNetworkTest.loRaNodes[0].app[0] alarmSent ETV
+vector 396 LoRaNetworkTest.networkServer.app[0] "Vector of SNIR per node" ETV
+vector 397 LoRaNetworkTest.networkServer.app[0] "Vector of RSSI per node" ETV
+vector 398 LoRaNetworkTest.networkServer.app[0] "Received Sequence number" ETV
+vector 399 LoRaNetworkTest.networkServer.app[0] "Vector of SNIR per node" ETV
+vector 400 LoRaNetworkTest.networkServer.app[0] "Vector of RSSI per node" ETV
+vector 401 LoRaNetworkTest.networkServer.app[0] "Received Sequence number" ETV
+vector 402 LoRaNetworkTest.networkServer.app[0] "Calculated SNRmargin in ADR" ETV
+vector 403 LoRaNetworkTest.networkServer.app[0] "Calculated SNRmargin in ADR" ETV
+vector 404 LoRaNetworkTest.networkServer.app[0] "Calculated SNRmargin in ADR" ETV
+vector 405 LoRaNetworkTest.networkServer.app[0] "Calculated SNRmargin in ADR" ETV
+vector 406 LoRaNetworkTest.networkServer.app[0] "Calculated SNRmargin in ADR" ETV
+0	98746 2558 0 16416 0 1945.44883177383 103 0 0 0 0
+1	101304 2558 0 16416 0 1945.44883177383 103 0 0 0 0
+2	103862 2518 91 16416 5.44883177383 1945.44883177383 98 0 0 0 0
+3	106380 2714 91 16416 5.44883177383 1945.44883177383 98 160 160 15680 2508800
+4	109094 302060 91 16416 0.1 1945.4 19454 0 1600 155200 248320000
+5	411154 2714 91 16416 5.44883177383 1945.44883177383 98 160 160 15680 2508800
+6	413868 302060 91 16416 0.1 1945.4 19454 0 1600 155200 248320000
+18	715928 21202 0 16442 0 1947.16095977383 794 0 3 1273 2431
+19	737130 20160 131 16374 8.16095977383 1931.16095977383 752 0 3 649 1195
+20	757290 10468 91 16442 5.44883177383 1947.16095977383 392 0 2 392 588
+23	767758 2661 0 16387 0 1944.23654796788 103 0 0 0 0
+24	770419 2661 0 16387 0 1944.23654796788 103 0 0 0 0
+25	773080 2616 12 16387 4.23654796788 1944.23654796788 98 0 0 0 0
+26	775696 2812 12 16387 4.23654796788 1944.23654796788 98 160 160 15680 2508800
+27	778508 321336 12 16387 0.1 1944.2 19442 0 1600 155200 248320000
+28	1099844 2812 12 16387 4.23654796788 1944.23654796788 98 160 160 15680 2508800
+29	1102656 321336 12 16387 0.1 1944.2 19442 0 1600 155200 248320000
+41	1423992 18967 0 16439 0 1946.73011596788 707 0 3 1136 2194
+42	1442959 14977 120 16439 6.94867596788 1946.73011596788 554 0 3 403 655
+43	1457936 10466 12 16403 4.23654796788 1944.73011596788 392 0 2 392 588
+46	1468402 2663 0 16426 0 1946.45894115092 103 0 0 0 0
+47	1471065 2663 0 16426 0 1946.45894115092 103 0 0 0 0
+48	1473728 2618 112 16426 6.45894115092 1946.45894115092 98 0 0 0 0
+49	1476346 2814 112 16426 6.45894115092 1946.45894115092 98 160 160 15680 2508800
+50	1479160 321926 112 16426 0.1 1946.4 19464 0 1600 155200 248320000
+51	1801086 2814 112 16426 6.45894115092 1946.45894115092 98 160 160 15680 2508800
+52	1803900 321926 112 16426 0.1 1946.4 19464 0 1600 155200 248320000
+64	2125826 15934 0 16433 0 1946.70572515092 598 0 3 990 1974
+65	2141760 10917 143 16373 9.17106915092 1930.70572515092 408 0 3 222 258
+66	2152677 10472 112 16433 6.45894115092 1946.70572515092 392 0 2 392 588
+69	2163149 2661 0 16395 0 1944.37587209977 103 0 0 0 0
+70	2165810 2661 0 16395 0 1944.37587209977 103 0 0 0 0
+71	2168471 2616 20 16395 4.37587209977 1944.37587209977 98 0 0 0 0
+72	2171087 2812 20 16395 4.37587209977 1944.37587209977 98 160 160 15680 2508800
+73	2173899 321351 20 16395 0.1 1944.3 19443 0 1600 155200 248320000
+74	2495250 2812 20 16395 4.37587209977 1944.37587209977 98 160 160 15680 2508800
+75	2498062 321351 20 16395 0.1 1944.3 19443 0 1600 155200 248320000
+87	2819413 17520 0 16440 0 1946.86944009977 655 0 3 1067 2091
+88	2836933 13093 121 16440 7.08800009977 1946.86944009977 486 0 3 318 468
+89	2850026 10468 20 16409 4.37587209977 1944.86944009977 392 0 2 392 588
+92	2860494 2633 0 16355 0 1928.91773001757 102 0 0 0 0
+93	2863127 2633 0 16355 0 1928.91773001757 102 0 0 0 0
+94	2865760 2588 4 16355 3.64904181832 1928.91773001757 97 0 0 0 0
+95	2868348 2782 4 16355 3.64904181832 1928.91773001757 97 160 160 15520 2483200
+96	2871130 318698 4 16355 0.1 1928.9 19289 0 1600 153600 245760000
+97	3189828 2782 4 16355 3.64904181832 1928.91773001757 97 160 160 15520 2483200
+98	3192610 318698 4 16355 0.1 1928.9 19289 0 1600 153600 245760000
+110	3511308 16186 0 16378 0 1933.16451401757 586 0 3 972 1942
+111	3527494 10868 110 16378 6.36116981832 1933.16451401757 392 0 3 202 214
+112	3538362 10742 4 16363 3.64904181832 1929.16451401757 388 0 2 388 582
+115	3549104 30 0 0 0 0 3 0 4 4 16
+116	3549134 10 0 0 0 0 1 1 1 1 1
+117	3549144 10 0 0 0 0 1 1 1 1 1
+120	3549154 5554 0 16466 0 1947.16096196929 202 0 0 0 0
+121	3554708 5554 0 16466 0 1947.16096196929 202 0 0 0 0
+122	3560262 5504 36 16466 5.36117081901 1947.16096196929 197 0 0 0 0
+123	3565766 5898 36 16466 5.36117081901 1947.16096196929 197 368 664 126072 81968960
+124	3571664 341710 36 16450 0.1 1947.1 19471 0 10320 1250400 8872320000
+125	3913374 5898 36 16466 5.36117081901 1947.16096196929 197 368 664 126072 81968960
+126	3919272 341710 36 16450 0.1 1947.1 19471 0 10320 1250400 8872320000
+131	4260982 5701 37 16468 5.36117139501 1947.16096269729 197 64 83 16047 1312445
+132	4266683 693 47 16462 5.36117207101 1947.16096196929 24 64 64 1536 98304
+133	4267376 693 47 16462 5.36117207101 1947.16096196929 24 64 64 1536 98304
+136	4268069 5701 36 16466 5.36117081901 1947.16096196929 197 46 83 15759 1280765
+142	4273770 5244 33 16447 5.36117081901 1947.16096071729 181 45 45 8145 366525
+143	4279014 236 4346 15999 511.84986486626 1888.38096656529 8 24 24 192 4608
+144	4279250 238 0 15999 0 1888.38096656529 9 0 8 36 204
+145	4279488 10 0 0 0 0 1 0 0 0 0
+146	4279498 10 0 0 0 0 1 0 0 0 0
+153	4279508 457 34 16448 5.36117081901 1947.16096071729 16 28 28 448 12544
+155	4279965 5701 35 16465 5.36117081901 1947.16096196929 197 28 65 12213 777269
+156	4285666 693 48 16463 5.36117207101 1947.16096196929 24 46 46 1104 50784
+158	4286359 693 73 16488 5.37117524701 1947.17096514529 24 28 44 800 28032
+159	4287052 5672 71 16486 5.37117524701 1947.17096514529 196 46 65 12436 794356
+165	4292724 690 0 15978 0 1888.37096404529 28 0 0 0 0
+166	4293414 690 0 15978 0 1888.37096404529 28 0 0 0 0
+167	4294104 640 74 15978 5.37117524701 1888.37096404529 23 0 0 0 0
+168	4294744 717 74 16489 5.37117524701 1947.17096514529 24 368 496 9856 4134912
+169	4295461 333555 74 16489 0.1 1906.2 19062 0 4960 94880 399948800
+170	4629016 686 74 15978 5.37117524701 1888.37096404529 23 368 496 9488 3999488
+171	4629702 330187 74 15978 0.1 1888.3 18883 0 4960 89920 375347200
+176	4959889 663 76 15979 5.37117582301 1888.37096462129 23 64 64 1472 94208
+177	4960552 5672 70 16485 5.37117524701 1947.17096514529 196 64 83 15964 1305556
+178	4966224 5672 70 16485 5.37117524701 1947.17096514529 196 64 83 15964 1305556
+181	4971896 663 74 15978 5.37117524701 1888.37096404529 23 46 62 1186 62492
+194	4972559 457 72 16487 5.37117524701 1947.17096514529 16 28 28 448 12544
+195	4973016 236 4322 15975 511.83986234626 1888.37096404529 8 24 24 192 4608
+196	4973252 5215 87 16340 5.37117665101 1927.17096404529 180 45 45 8100 364500
+197	4978467 5297 0 16340 0 1927.17096404529 181 0 180 16290 1960230
+198	4983764 10 0 0 0 0 1 0 0 0 0
+199	4983774 10 0 0 0 0 1 0 0 0 0
+200	4983784 5114 0 16478 0 1947.17096389329 186 0 0 0 0
+201	4988898 5114 0 16478 0 1947.17096389329 186 0 0 0 0
+202	4994012 5064 63 16478 5.37117399501 1947.17096389329 181 0 0 0 0
+203	4999076 5426 63 16478 5.37117399501 1947.17096389329 181 520 520 94120 48942400
+204	5004502 341719 63 16478 0.1 1947.1 19471 0 5200 936000 4867200000
+205	5346221 5426 63 16478 5.37117399501 1947.17096389329 181 520 520 94120 48942400
+206	5351647 341719 63 16478 0.1 1947.1 19471 0 5200 936000 4867200000
+211	5693366 10138 0 16479 0 1947.17096446929 363 0 1 181 181
+212	5703504 5245 63 16478 5.37117399501 1947.17096389329 181 72 72 13032 938304
+213	5708749 236 4333 15986 511.83986343026 1888.37096512929 8 51 51 408 20808
+217	5708985 236 4333 15986 511.83986343026 1888.37096512929 8 44 44 352 15488
+220	5709221 278 0 15989 0 1888.38096548129 13 0 0 0 0
+221	5709499 278 0 15989 0 1888.38096548129 13 0 0 0 0
+222	5709777 228 4336 15989 511.84986378226 1888.38096548129 8 0 0 0 0
+223	5710005 244 4336 15989 511.84986378226 1888.38096548129 8 352 352 2816 991232
+224	5710249 331454 4336 15989 0.1 1888.3 18883 0 3520 24640 86732800
+225	6041703 244 4336 15989 511.84986378226 1888.38096548129 8 352 352 2816 991232
+226	6041947 331454 4336 15989 0.1 1888.3 18883 0 3520 24640 86732800
+231	6373401 466 0 15990 0 1888.38096588929 17 0 1 8 8
+232	6373867 236 4336 15989 511.84986378226 1888.38096548129 8 51 51 408 20808
+233	6374103 5245 60 16475 5.36117347501 1947.16096337329 181 72 72 13032 938304
+237	6379348 5245 60 16475 5.36117347501 1947.16096337329 181 65 65 11765 764725
+248	6384593 693 41 16457 5.36117144501 1947.16096134329 24 28 44 800 28032
+249	6385286 5701 39 16470 5.36117144501 1947.16096274729 197 46 65 12501 798581
+255	6390987 5113 0 16472 0 1947.16096274729 186 0 0 0 0
+256	6396100 5113 0 16472 0 1947.16096274729 186 0 0 0 0
+257	6401213 5063 57 16472 5.36117284901 1947.16096274729 181 0 0 0 0
+258	6406276 5425 57 16472 5.36117284901 1947.16096274729 181 520 520 94120 48942400
+259	6411701 341695 57 16472 0.1 1947.1 19471 0 5200 936000 4867200000
+260	6753396 5425 57 16472 5.36117284901 1947.16096274729 181 520 520 94120 48942400
+261	6758821 341695 57 16472 0.1 1947.1 19471 0 5200 936000 4867200000
+266	7100516 10137 0 16474 0 1947.16096332329 363 0 1 181 181
+267	7110653 5244 57 16472 5.36117284901 1947.16096274729 181 72 72 13032 938304
+268	7115897 236 4338 15991 511.84986424026 1888.38096593929 8 51 51 408 20808
+272	7116133 236 4338 15991 511.84986424026 1888.38096593929 8 44 44 352 15488
+275	7116369 719 0 16458 0 1947.16096134329 29 0 0 0 0
+276	7117088 719 0 16458 0 1947.16096134329 29 0 0 0 0
+277	7117807 669 42 16458 5.36117144501 1947.16096134329 24 0 0 0 0
+278	7118476 717 42 16458 5.36117144501 1947.16096134329 24 368 496 9856 4134912
+279	7119193 341244 42 16458 0.1 1947.1 19471 0 4960 94880 399948800
+280	7460437 717 42 16458 5.36117144501 1947.16096134329 24 368 496 9856 4134912
+281	7461154 341244 42 16458 0.1 1947.1 19471 0 4960 94880 399948800
+286	7802398 693 46 16461 5.36117202101 1947.16096191929 24 64 64 1536 98304
+287	7803091 5701 38 16469 5.36117144501 1947.16096274729 197 64 83 16047 1312445
+288	7808792 5701 38 16469 5.36117144501 1947.16096274729 197 64 83 16047 1312445
+291	7814493 693 42 16458 5.36117144501 1947.16096134329 24 46 62 1232 64608
+304	7815186 457 40 16456 5.36117144501 1947.16096134329 16 28 28 448 12544
+305	7815643 5672 67 16482 5.37117462101 1947.17096451929 196 28 65 12148 773044
+306	7821315 663 78 15981 5.37117587301 1888.37096467129 23 46 46 1058 48668
+312	7821978 278 0 15983 0 1888.37096467129 13 0 0 0 0
+313	7822256 278 0 15983 0 1888.37096467129 13 0 0 0 0
+314	7822534 228 4330 15983 511.83986297226 1888.37096467129 8 0 0 0 0
+315	7822762 244 4330 15983 511.83986297226 1888.37096467129 8 352 352 2816 991232
+316	7823006 331454 4330 15983 0.1 1888.3 18883 0 3520 24640 86732800
+317	8154460 244 4330 15983 511.83986297226 1888.37096467129 8 352 352 2816 991232
+318	8154704 331454 4330 15983 0.1 1888.3 18883 0 3520 24640 86732800
+323	8486158 466 0 15985 0 1888.37096507929 17 0 1 8 8
+324	8486624 236 4330 15983 511.83986297226 1888.37096467129 8 51 51 408 20808
+325	8486860 5245 65 16480 5.37117462101 1947.17096451929 181 72 72 13032 938304
+329	8492105 5245 65 16480 5.37117462101 1947.17096451929 181 65 65 11765 764725
+332	8497350 5526 0 16483 0 1947.17096451929 201 0 0 0 0
+333	8502876 5526 0 16483 0 1947.17096451929 201 0 0 0 0
+334	8508402 5476 68 16483 5.37117462101 1947.17096451929 196 0 0 0 0
+335	8513878 5868 68 16483 5.37117462101 1947.17096451929 196 368 664 125408 81528064
+336	8519746 341734 68 16483 0.1 1947.1 19471 0 10320 1250400 8872320000
+337	8861480 5868 68 16483 5.37117462101 1947.17096451929 196 368 664 125408 81528064
+338	8867348 341734 68 16483 0.1 1947.1 19471 0 10320 1250400 8872320000
+343	9209082 5672 69 16484 5.37117519701 1947.17096509529 196 64 83 15964 1305556
+344	9214754 663 77 15980 5.37117587301 1888.37096467129 23 64 64 1472 94208
+345	9215417 663 77 15980 5.37117587301 1888.37096467129 23 64 64 1472 94208
+348	9216080 5672 68 16483 5.37117462101 1947.17096451929 196 46 83 15676 1273876
+360	9221752 457 66 16481 5.37117462101 1947.17096451929 16 28 28 448 12544
+362	9222209 1114 0 16385 0 1940.5532796736 28 6.07297989794 232.80464838073 2030.4822401688 244031.46571383
+363	9223323 1110 0 13811 0 1672.02208550204 28 0.49005462514 285.07849732913 1957.1005828312 248127.24429222
+364	9224433 1270 0 15026 0 1798.18014750769 32 0.53012573025 256.73494127327 2033.1662915952 283402.24905589
+365	9225703 1558 0 16306 0 1926.76424965833 39 0.01167070695 213.43280640198 2025.6680096908 210566.6657904
+366	9227261 1445 0 16348 0 1928.55218774583 36 3.64904181832 207.18201749552 2030.3554355707 208288.37657481
+367	9228706 937 3 16354 3.64904181832 1928.91773001757 33 1 33 561 12529
+368	9229643 2711 3 16354 3.64904181832 1928.91773001757 97 9 12 951 9495
+369	9232354 2782 3 16354 3.64904181832 1928.91773001757 97 14 14 1358 19012
+370	9235136 2998 11 16386 4.23654796788 1944.23654796788 72 45.296008244622 54.830597559921 3647.4523334624 185354.85196231
+371	9238134 2812 11 16386 4.23654796788 1944.23654796788 98 10 12 1106 12572
+372	9240946 2812 11 16386 4.23654796788 1944.23654796788 98 14 14 1372 19208
+373	9243758 2828 19 16227 4.37587209977 1924.37587209977 68 45.270689867903 54.818160892464 3382.8847127804 168836.50721965
+374	9246586 2812 19 16394 4.37587209977 1944.37587209977 98 10 12 1136 13232
+375	9249398 2812 19 16394 4.37587209977 1944.37587209977 98 14 14 1372 19208
+376	9252210 1736 88 15834 5.37117665101 1870.37451834626 42 0.95812304401831 22.463660919629 154.54356726279 1375.0099016814
+377	9253946 1778 88 15834 5.37117665101 1870.37451834626 42 -136.44135860574 -121.86237558311 -5408.6015779092 696990.46624747
+378	9255724 3039 90 16278 5.44883177383 1925.44883177383 73 45.302082058042 54.829901119228 3633.7484785588 181426.66549009
+379	9258763 2812 90 16415 5.44883177383 1945.44883177383 98 12 12 1176 14112
+380	9261575 2812 90 16415 5.44883177383 1945.44883177383 98 14 14 1372 19208
+381	9264387 3037 111 16425 6.45894115092 1946.45894115092 73 45.135716418736 54.92666992126 3640.9115230618 182128.13202577
+382	9267424 2767 111 16425 6.45894115092 1946.45894115092 98 9 12 1035 11151
+383	9270191 2814 111 16425 6.45894115092 1946.45894115092 98 14 14 1372 19208
+384	9273005 1163 119 15834 6.57117665101 1870.37451834626 41 0 93 1615 95269
+385	9274168 2663 171 16014 24.26210528017 1888.91773001757 64 45.351073695347 54.960712711327 3185.0993261184 158996.64153849
+386	9276831 855 179 16394 24.37587209977 1944.37587209977 30 1 30 465 9455
+387	9277686 704 315 15069 46.45894115092 1806.45894115092 25 1 25 325 5525
+388	9278390 1722 374 15571 48.18107342238 1847.91572942238 41 0.38664080447255 11.096508409896 93.819779141049 415.49150320687
+389	9280112 1750 374 15571 48.18107342238 1847.91572942238 41 -134.26333544525 -121.10325700026 -5223.2175850922 665774.70612395
+390	9281862 1151 382 15571 49.38107342238 1847.91572942238 40 2 92 1937 124285
+391	9283013 731 404 13821 64.23654796788 1684.23654796788 26 1 26 351 6201
+392	9283744 1651 703 16288 105.95868023934 1925.94012023934 39 -0.53851599810089 3.7419548353609 47.272046868424 85.604458082434
+393	9285395 1671 703 16288 105.95868023934 1925.94012023934 39 -132.79312586891 -121.66016292232 -5025.1690173213 647756.21457717
+394	9287066 1102 721 16288 107.15868023934 1925.94012023934 38 5 96 2081 142829
+395	9288168 705 827 16415 125.44883177383 1945.44883177383 25 1 25 325 5525
+396	9288873 1493 1417 16347 187.17096404529 1928.37096404529 35 0.14991403855858 2.9323898913045 36.325303404703 56.690604873407
+397	9290366 1516 1417 16347 187.17096404529 1928.37096404529 35 -135.84943041196 -124.97821294644 -4555.5090786743 593224.9352874
+398	9291882 999 1428 16347 188.37096404529 1928.37096404529 34 9 96 2270 175852
+399	9292881 1184 2954 16124 366.09800437123 1906.07944437123 28 0.35792911273018 6.8874896880188 50.096624214825 146.68628092399
+400	9294065 1204 2954 16124 366.09800437123 1906.07944437123 28 -133.04322064923 -122.79594680182 -3582.777789883 458665.56915661
+401	9295269 788 2973 16124 367.29800437123 1906.07944437123 27 18 95 1595 110427
+402	9296057 86 4321 14612 511.83986234626 1750.37451834626 2 -0.23861509842443 10.295438608222 10.056823509797 106.05299330086
+403	9296143 86 7925 15571 1009.38107342238 1847.91572942238 2 -1.3008106802028 8.4592193599363 7.1584086797334 73.250500605251
+404	9296229 42 9917 9917 1247.15868023934 1247.15868023934 1 6.2044923103695 6.2044923103695 6.2044923103695 38.495724829434
+405	9296271 86 10361 15974 1288.37096404529 1888.37096404529 2 5.7197470519071 6.4089088566623 12.128655908569 73.789619070805
+406	9296357 43 12805 12805 1547.29800437123 1547.29800437123 1 6.5190934292956 6.5190934292956 6.5190934292956 42.498579139885
+376	9296400 1502 17100 32580 2010.37451834626 3550.37451834626 35 1.0094289053794 6.9407881062641 86.775436279593 283.78339560685
+377	9297902 1535 17100 32580 2010.37451834626 3550.37451834626 35 -132.51164055993 -122.52615151661 -4468.9625391661 570798.03241984
+384	9299437 1085 17100 32580 2010.37451834626 3550.37451834626 35 100 177 4861 694345
+402	9300522 43 24688 24688 2790.62130234626 2790.62130234626 1 2.7316027276748 2.7316027276748 2.7316027276748 7.4616534618402
+388	9300565 1701 17466 32779 2047.91572942238 3568.16251342238 39 0.25675573565625 2.4008224798713 34.670542536557 39.754698030522
+389	9302266 1714 17466 32779 2047.91572942238 3568.16251342238 39 -132.63351192995 -124.48209658591 -5018.0442788655 645785.44020306
+390	9303980 1209 17466 32779 2047.91572942238 3568.16251342238 39 102 178 5399 772249
+403	9305189 44 24215 24215 2747.91572942238 2747.91572942238 1 -1.4652639880733 -1.4652639880733 -1.4652639880733 2.1469985547444
+392	9305233 1945 16616 32918 1965.94012023934 3586.30261623934 45 0.21252510563908 8.1118775931194 78.882924654857 232.41323921222
+393	9307178 1973 16616 32918 1965.94012023934 3586.30261623934 45 -134.49819654727 -122.754248782 -5790.0598712895 745333.58233509
+394	9309151 1393 16616 32918 1965.94012023934 3586.30261623934 45 98 179 6606 998998
+404	9310544 129 16781 32174 1985.94012023934 3526.30261623934 3 1.4749740647895 4.3104001762425 7.4959075980997 23.681022536794
+396	9310673 3385 16509 32974 1948.37096654929 3588.37096404529 78 0.11683833644003 8.2673811947933 133.03893286998 492.59735816251
+397	9314058 3420 16509 32974 1948.37096654929 3588.37096404529 78 -136.09108236164 -124.04434487442 -10135.054410766 1317664.1709732
+398	9317478 2415 16509 32974 1948.37096654929 3588.37096404529 78 97 179 10793 1539215
+405	9319893 172 19905 28641 2308.37096404529 3208.37096404529 4 6.0941602544767 6.9998290678244 26.963688723086 182.32373657221
+399	9320065 1690 17608 32916 2066.07944437123 3586.07944437123 39 0.19034060332827 3.7342556783128 51.663410631272 103.11785559528
+400	9321755 1711 17608 32916 2066.07944437123 3586.07944437123 39 -132.8342101677 -124.39600541719 -5024.6920463865 647612.008165
+401	9323466 1209 17608 32916 2066.07944437123 3586.07944437123 39 103 179 5618 832406
+406	9324675 86 22141 31232 2546.07944437123 3446.07944437123 2 1.4056861217925 1.5797415737566 2.9854276955492 4.4715369128552
+0	9324761 2214 16607 32907 1965.44883177383 3585.44883177383 82 0 0 0 0
+1	9326975 2214 16607 32907 1965.44883177383 3585.44883177383 82 0 0 0 0
+2	9329189 2214 16607 32907 1965.44883177383 3585.44883177383 82 0 0 0 0
+3	9331403 2378 16607 32907 1965.44883177383 3585.44883177383 82 160 160 13120 2099200
+4	9333781 278221 16607 33012 1945.5 3600 16546 0 1600 132800 212480000
+5	9612002 2378 16607 32907 1965.44883177383 3585.44883177383 82 160 160 13120 2099200
+6	9614380 278221 16607 33012 1945.5 3600 16546 0 1600 132800 212480000
+18	9892601 19376 16508 33000 1948.16095977383 3591.16095977383 692 1 3 1106 2098
+19	9911977 18704 16508 33000 1948.16095977383 3591.16095977383 668 0 3 586 1090
+20	9930681 9184 16607 32935 1965.44883177383 3587.16095977383 328 0 2 328 492
+23	9939865 2296 16549 32820 1964.23654796788 3584.23654796788 82 0 0 0 0
+24	9942161 2296 16549 32820 1964.23654796788 3584.23654796788 82 0 0 0 0
+25	9944457 2296 16549 32820 1964.23654796788 3584.23654796788 82 0 0 0 0
+26	9946753 2460 16549 32820 1964.23654796788 3584.23654796788 82 160 160 13120 2099200
+27	9949213 294981 16549 33012 1944.3 3600 16558 0 1600 132800 212480000
+28	10244194 2460 16549 32820 1964.23654796788 3584.23654796788 82 160 160 13120 2099200
+29	10246654 294981 16549 33012 1944.3 3600 16558 0 1600 132800 212480000
+41	10541635 22478 16506 32990 1947.73011596788 3589.16451476344 803 1 3 1242 2284
+42	10564113 21551 16506 32990 1947.73011596788 3589.16451476344 770 0 3 715 1375
+43	10585664 9184 16549 32871 1964.23654796788 3585.09261196788 328 0 2 328 492
+46	10594848 2296 16619 32920 1966.45894115092 3586.45894115092 82 0 0 0 0
+47	10597144 2296 16619 32920 1966.45894115092 3586.45894115092 82 0 0 0 0
+48	10599440 2296 16619 32920 1966.45894115092 3586.45894115092 82 0 0 0 0
+49	10601736 2460 16619 32920 1966.45894115092 3586.45894115092 82 160 160 13120 2099200
+50	10604196 294589 16619 33012 1946.5 3600 16536 0 1600 132800 212480000
+51	10898785 2460 16619 32920 1966.45894115092 3586.45894115092 82 160 160 13120 2099200
+52	10901245 294589 16619 33012 1946.5 3600 16536 0 1600 132800 212480000
+64	11195834 16912 16505 32999 1947.70572515092 3590.95250915092 604 1 3 971 1869
+65	11212746 13440 16505 32999 1947.70572515092 3590.95250915092 480 0 3 351 573
+66	11226186 9184 16619 32928 1966.45894115092 3586.95250915092 328 0 2 328 492
+69	11235370 2296 16557 32828 1964.37587209977 3584.37587209977 82 0 0 0 0
+70	11237666 2296 16557 32828 1964.37587209977 3584.37587209977 82 0 0 0 0
+71	11239962 2296 16557 32828 1964.37587209977 3584.37587209977 82 0 0 0 0
+72	11242258 2460 16557 32828 1964.37587209977 3584.37587209977 82 160 160 13120 2099200
+73	11244718 294963 16557 33012 1944.4 3600 16557 0 1600 132800 212480000
+74	11539681 2460 16557 32828 1964.37587209977 3584.37587209977 82 160 160 13120 2099200
+75	11542141 294963 16557 33012 1944.4 3600 16557 0 1600 132800 212480000
+87	11837104 20771 16507 32975 1947.86944009977 3588.86944009977 742 1 3 1159 2157
+88	11857875 19199 16507 32975 1947.86944009977 3588.86944009977 686 0 3 613 1153
+89	11877074 9184 16557 32835 1964.37587209977 3584.86944009977 328 0 2 328 492
+92	11886258 2324 16516 32977 1948.91773001757 3588.91773001757 83 0 0 0 0
+93	11888582 2324 16516 32977 1948.91773001757 3588.91773001757 83 0 0 0 0
+94	11890906 2324 16516 32977 1948.91773001757 3588.91773001757 83 0 0 0 0
+95	11893230 2490 16516 32977 1948.91773001757 3588.91773001757 83 160 160 13280 2124800
+96	11895720 297706 16516 33012 1929 3600 16711 0 1600 134400 215040000
+97	12193426 2490 16516 32977 1948.91773001757 3588.91773001757 83 160 160 13280 2124800
+98	12195916 297706 16516 33012 1929 3600 16711 0 1600 134400 215040000
+110	12493622 14384 16516 33004 1948.91773001757 3593.16451401757 496 1 3 827 1655
+111	12508006 9628 16533 33004 1950.16451401757 3593.16451401757 332 0 3 169 175
+112	12517634 9628 16516 32988 1948.91773001757 3589.16451401757 332 0 2 332 498
+120	12527262 7163 16572 32943 1964.73011691134 3587.16096071729 247 0 0 0 0
+121	12534425 7163 16572 32943 1964.73011691134 3587.16096071729 247 0 0 0 0
+122	12541588 7163 16572 32943 1964.73011691134 3587.16096071729 247 0 0 0 0
+123	12548751 7657 16572 32943 1964.73011691134 3587.16096071729 247 368 664 160456 105235648
+124	12556408 311466 16572 33012 1947.2 3600 16529 0 10320 1614880 11216512000
+125	12867874 7657 16572 32943 1964.73011691134 3587.16096071729 247 368 664 160456 105235648
+126	12875531 311466 16572 33012 1947.2 3600 16529 0 10320 1614880 11216512000
+131	13186997 7410 16575 32946 1964.73011763934 3587.16096144529 247 64 83 20273 1668067
+132	13194407 690 16803 32196 1985.95012275934 3526.31261875934 23 64 64 1472 94208
+133	13195097 690 16803 32196 1985.95012275934 3526.31261875934 23 64 64 1472 94208
+136	13195787 7410 16572 32943 1964.73011691134 3587.16096071729 247 46 83 20057 1644307
+142	13203197 7050 16569 32940 1964.73011691134 3587.16096071729 235 45 45 10575 475875
+143	13210247 330 16806 32199 1985.95012275934 3526.31261875934 11 24 24 264 6336
+144	13210577 329 16806 32199 1985.95012275934 3526.31261875934 11 9 19 154 2266
+153	13210906 360 17717 31778 2069.16451501826 3487.16096071729 12 28 28 336 9408
+155	13211266 7410 16571 32942 1964.73011691134 3587.16096071729 247 28 65 15611 1002283
+156	13218676 690 16804 32197 1985.95012275934 3526.31261875934 23 46 46 1058 48668
+158	13219366 690 16784 32177 1985.94012023934 3526.30261623934 23 28 44 820 30704
+159	13220056 7440 16500 32965 1947.17096654929 3587.17096404529 248 46 65 15892 1022492
+165	13227496 696 16489 32178 1947.17096514529 3526.30261623934 24 0 0 0 0
+166	13228192 696 16489 32178 1947.17096514529 3526.30261623934 24 0 0 0 0
+167	13228888 696 16489 32178 1947.17096514529 3526.30261623934 24 0 0 0 0
+168	13229584 713 16785 32178 1985.94012023934 3526.30261623934 23 368 496 9872 4331264
+169	13230297 318506 16489 33012 1906.3 3600 16938 0 4960 102400 446668800
+170	13548803 744 16489 32178 1947.17096514529 3526.30261623934 24 368 496 10240 4466688
+171	13549547 321874 16489 33012 1888.4 3600 17117 0 4960 107360 471270400
+176	13871421 720 16491 32179 1947.17096572129 3526.30261681534 24 64 64 1536 98304
+177	13872141 7440 16499 32964 1947.17096654929 3587.17096404529 248 64 83 20356 1674956
+178	13879581 7440 16499 32964 1947.17096654929 3587.17096404529 248 64 83 20356 1674956
+181	13887021 720 16489 32178 1947.17096514529 3526.30261623934 24 46 62 1280 69792
+194	13887741 360 17755 31817 2069.17451944626 3487.17096514529 12 28 28 336 9408
+195	13888101 330 16782 32175 1985.94012023934 3526.30261623934 11 24 24 264 6336
+196	13888431 7080 16502 32967 1947.17096654929 3587.17096404529 236 45 45 10620 477900
+197	13895511 7316 16502 32967 1947.17096654929 3587.17096404529 236 181 416 70446 22123466
+200	13902827 6815 16586 32957 1964.74011883534 3587.17096264129 235 0 0 0 0
+201	13909642 6815 16586 32957 1964.74011883534 3587.17096264129 235 0 0 0 0
+202	13916457 6815 16586 32957 1964.74011883534 3587.17096264129 235 0 0 0 0
+203	13923272 7285 16586 32957 1964.74011883534 3587.17096264129 235 520 520 122200 63544000
+204	13930557 311453 16586 33012 1947.2 3600 16529 0 5200 1227200 6381440000
+205	14242010 7285 16586 32957 1964.74011883534 3587.17096264129 235 520 520 122200 63544000
+206	14249295 311453 16586 33012 1947.2 3600 16529 0 5200 1227200 6381440000
+211	14560748 13630 16586 32958 1964.74011883534 3587.17096321729 470 0 1 235 235
+212	14574378 7050 16586 32957 1964.74011883534 3587.17096264129 235 72 72 16920 1218240
+213	14581428 330 16793 32186 1985.94012132334 3526.30261732334 11 51 51 561 28611
+217	14581758 330 16793 32186 1985.94012132334 3526.30261732334 11 44 44 484 21296
+220	14582088 319 16796 32189 1985.95012167534 3526.31261767534 11 0 0 0 0
+221	14582407 319 16796 32189 1985.95012167534 3526.31261767534 11 0 0 0 0
+222	14582726 319 16796 32189 1985.95012167534 3526.31261767534 11 0 0 0 0
+223	14583045 341 16796 32189 1985.95012167534 3526.31261767534 11 352 352 3872 1362944
+224	14583386 321835 16796 33012 1888.4 3600 17117 0 3520 42240 148684800
+225	14905221 341 16796 32189 1985.95012167534 3526.31261767534 11 352 352 3872 1362944
+226	14905562 321835 16796 33012 1888.4 3600 17117 0 3520 42240 148684800
+231	15227397 638 16796 32190 1985.95012167534 3526.31261808334 22 0 1 11 11
+232	15228035 330 16796 32189 1985.95012167534 3526.31261767534 11 51 51 561 28611
+233	15228365 7050 16583 32954 1964.73011831534 3587.16096212129 235 72 72 16920 1218240
+237	15235415 7050 16583 32954 1964.73011831534 3587.16096212129 235 65 65 15275 992875
+248	15242465 690 16800 32193 1985.95012213334 3526.31261813334 23 28 44 820 30704
+249	15243155 7410 16577 32948 1964.73011768934 3587.16096149529 247 46 65 15827 1018267
+255	15250565 6815 16579 32950 1964.73011768934 3587.16096149529 235 0 0 0 0
+256	15257380 6815 16579 32950 1964.73011768934 3587.16096149529 235 0 0 0 0
+257	15264195 6815 16579 32950 1964.73011768934 3587.16096149529 235 0 0 0 0
+258	15271010 7285 16579 32950 1964.73011768934 3587.16096149529 235 520 520 122200 63544000
+259	15278295 311453 16579 33012 1947.2 3600 16529 0 5200 1227200 6381440000
+260	15589748 7285 16579 32950 1964.73011768934 3587.16096149529 235 520 520 122200 63544000
+261	15597033 311453 16579 33012 1947.2 3600 16529 0 5200 1227200 6381440000
+266	15908486 13630 16579 32953 1964.73011768934 3587.16096207129 470 0 1 235 235
+267	15922116 7050 16579 32950 1964.73011768934 3587.16096149529 235 72 72 16920 1218240
+268	15929166 330 16798 32191 1985.95012213334 3526.31261813334 11 51 51 561 28611
+272	15929496 330 16798 32191 1985.95012213334 3526.31261813334 11 44 44 484 21296
+275	15929826 667 16801 32194 1985.95012213334 3526.31261813334 23 0 0 0 0
+276	15930493 667 16801 32194 1985.95012213334 3526.31261813334 23 0 0 0 0
+277	15931160 667 16801 32194 1985.95012213334 3526.31261813334 23 0 0 0 0
+278	15931827 713 16801 32194 1985.95012213334 3526.31261813334 23 368 496 9872 4331264
+279	15932540 310817 16801 33012 1947.2 3600 16529 0 4960 102400 446668800
+280	16243357 713 16801 32194 1985.95012213334 3526.31261813334 23 368 496 9872 4331264
+281	16244070 310817 16801 33012 1947.2 3600 16529 0 4960 102400 446668800
+286	16554887 690 16802 32195 1985.95012270934 3526.31261870934 23 64 64 1472 94208
+287	16555577 7410 16576 32947 1964.73011768934 3587.16096149529 247 64 83 20273 1668067
+288	16562987 7410 16576 32947 1964.73011768934 3587.16096149529 247 64 83 20273 1668067
+291	16570397 690 16801 32194 1985.95012213334 3526.31261813334 23 46 62 1234 67676
+304	16571087 360 17723 31786 2069.16451564426 3487.16096134329 12 28 28 336 9408
+305	16571447 7440 16495 32961 1947.17096577129 3587.17096326729 248 28 65 15676 1006508
+306	16578887 720 16493 32181 1947.17096577129 3526.30261686534 24 46 46 1104 50784
+312	16579607 319 16790 32183 1985.94012086534 3526.30261686534 11 0 0 0 0
+313	16579926 319 16790 32183 1985.94012086534 3526.30261686534 11 0 0 0 0
+314	16580245 319 16790 32183 1985.94012086534 3526.30261686534 11 0 0 0 0
+315	16580564 341 16790 32183 1985.94012086534 3526.30261686534 11 352 352 3872 1362944
+316	16580905 321835 16790 33012 1888.4 3600 17117 0 3520 42240 148684800
+317	16902740 341 16790 32183 1985.94012086534 3526.30261686534 11 352 352 3872 1362944
+318	16903081 321835 16790 33012 1888.4 3600 17117 0 3520 42240 148684800
+323	17224916 638 16790 32185 1985.94012086534 3526.30261727334 22 0 1 11 11
+324	17225554 330 16790 32183 1985.94012086534 3526.30261686534 11 51 51 561 28611
+325	17225884 7050 16588 32959 1964.74011946134 3587.17096326729 235 72 72 16920 1218240
+329	17232934 7050 16588 32959 1964.74011946134 3587.17096326729 235 65 65 15275 992875
+332	17239984 7192 16496 32962 1947.17096577129 3587.17096326729 248 0 0 0 0
+333	17247176 7192 16496 32962 1947.17096577129 3587.17096326729 248 0 0 0 0
+334	17254368 7192 16496 32962 1947.17096577129 3587.17096326729 248 0 0 0 0
+335	17261560 7688 16496 32962 1947.17096577129 3587.17096326729 248 368 664 161120 105676544
+336	17269248 311466 16591 33012 1947.2 3600 16529 0 10320 1614880 11216512000
+337	17580714 7688 16496 32962 1947.17096577129 3587.17096326729 248 368 664 161120 105676544
+338	17588402 311466 16591 33012 1947.2 3600 16529 0 10320 1614880 11216512000
+343	17899868 7440 16498 32963 1947.17096649929 3587.17096399529 248 64 83 20356 1674956
+344	17907308 720 16492 32180 1947.17096577129 3526.30261686534 24 64 64 1536 98304
+345	17908028 720 16492 32180 1947.17096577129 3526.30261686534 24 64 64 1536 98304
+348	17908748 7440 16496 32962 1947.17096577129 3587.17096326729 248 46 83 20140 1651196
+360	17916188 360 17749 31811 2069.17451882026 3487.17096451929 12 28 28 336 9408
+362	17916548 1170 17298 31901 2030.48224016879 3492.35399011861 28 0.33826381044 214.00369298482 1675.8754429346 202939.07189064
+363	17917718 1207 16545 33010 1957.10058283117 3598.68063813767 29 3.57537313354 283.4631089769 1856.1475210177 229918.92998863
+364	17918925 1334 17306 32802 2033.16629159525 3569.71631175549 32 0.1053698711 210.40753767987 1600.3428465171 149020.3180885
+365	17920259 1460 17180 32818 2025.66800969081 3579.8751218756 35 0.70964376235 297.73210668169 1851.9392188665 224201.21538244
+366	17921719 1047 17296 31835 2030.35543557069 3487.49736331564 25 4.11355675651 237.81354003313 1650.1754310202 225475.13765628
+367	17922766 660 17474 31843 2048.91773001757 3488.91773001757 22 34 55 979 44451
+368	17923426 2425 16515 32976 1948.91773001757 3588.91773001757 83 9 10 765 7065
+369	17925851 2490 16515 32976 1948.91773001757 3588.91773001757 83 14 14 1162 16268
+370	17928341 2615 16712 32819 1984.23654796788 3584.23654796788 61 45.363043760881 54.620378930122 3038.2592688571 151758.93263935
+371	17930956 2460 16548 32819 1964.23654796788 3584.23654796788 82 10 11 841 8641
+372	17933416 2460 16548 32819 1964.23654796788 3584.23654796788 82 14 14 1148 16072
+373	17935876 2317 16556 32348 1964.37587209977 3544.37587209977 54 45.130579315592 54.968824542593 2689.0841759229 134428.57816106
+374	17938193 2460 16556 32827 1964.37587209977 3584.37587209977 82 10 10 820 8200
+375	17940653 2460 16556 32827 1964.37587209977 3584.37587209977 82 14 14 1148 16072
+378	17943113 2526 16606 32906 1965.44883177383 3585.44883177383 59 45.2911379328 54.964495354798 2972.4159644893 150280.57541641
+379	17945639 2460 16606 32906 1965.44883177383 3585.44883177383 82 12 12 984 11808
+380	17948099 2460 16606 32906 1965.44883177383 3585.44883177383 82 14 14 1148 16072
+381	17950559 2400 16618 32440 1966.45894115092 3546.45894115092 56 45.065390809905 54.965211325325 2809.0146230324 141348.66119745
+382	17952959 2411 16618 32919 1966.45894115092 3586.45894115092 82 9 10 771 7269
+383	17955370 2460 16618 32919 1966.45894115092 3586.45894115092 82 14 14 1148 16072
+385	17957830 2613 16515 32976 1948.91773001757 3588.91773001757 61 45.360196053516 54.976001109462 3044.1682877066 152345.5181719
+386	17960443 840 17322 32827 2044.37587209977 3584.37587209977 28 31 58 1246 57274
+387	17961283 780 17383 32919 2046.45894115092 3586.45894115092 26 26 51 1001 40001
+391	17962063 630 16548 31910 1964.23654796788 3504.23654796788 21 27 47 777 29519
+395	17962693 690 17372 31997 2045.44883177383 3505.44883177383 23 26 48 851 32499
+
